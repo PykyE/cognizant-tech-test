@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "10ee0213-8898-4d1d-b3e5-98e5e2e8f4bd",
+		"name": "Cognizant test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14314486"
+	},
+	"item": [
+		{
+			"name": "Get all tickets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(200);\r",
+							"\r",
+							"    const response = pm.response.json();\r",
+							"    if (response.data && response.data.length > 0) {\r",
+							"        pm.environment.set(\"firstTicketId\", response.data[0].id);\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{PORT}}{{CONTEXT_PATH}}/tickets",
+					"host": [
+						"{{URL}}{{PORT}}{{CONTEXT_PATH}}"
+					],
+					"path": [
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ticket by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{PORT}}{{CONTEXT_PATH}}/tickets/{{firstTicketId}}",
+					"host": [
+						"{{URL}}{{PORT}}{{CONTEXT_PATH}}"
+					],
+					"path": [
+						"tickets",
+						"{{firstTicketId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create ticket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.equal(201);\r",
+							"    \r",
+							"    const response = pm.response.json();\r",
+							"    if (response.data) {\r",
+							"        pm.environment.set(\"createdTicketId\", response.data.id);\r",
+							"    }\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"test ticket title #10\",\r\n    \"description\": \"test ticket title #10\",\r\n    \"status\": \"OPEN\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{PORT}}{{CONTEXT_PATH}}/tickets",
+					"host": [
+						"{{URL}}{{PORT}}{{CONTEXT_PATH}}"
+					],
+					"path": [
+						"tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ticket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"modified test ticket #100\",\r\n    \"description\": \"modified test ticket #100\",\r\n    \"status\": \"IN_PROGRESS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{PORT}}{{CONTEXT_PATH}}/tickets/{{createdTicketId}}",
+					"host": [
+						"{{URL}}{{PORT}}{{CONTEXT_PATH}}"
+					],
+					"path": [
+						"tickets",
+						"{{createdTicketId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete ticket",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{PORT}}{{CONTEXT_PATH}}/tickets/{{createdTicketId}}",
+					"host": [
+						"{{URL}}{{PORT}}{{CONTEXT_PATH}}"
+					],
+					"path": [
+						"tickets",
+						"{{createdTicketId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "PORT",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "CONTEXT_PATH",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
