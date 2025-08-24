@@ -46,3 +46,9 @@ This will execute all tests defined in the project for both controllerss and ser
 ### 2. Using Visual Studio Code
 
 If you use VS Code and have the Java environment set up, you can open the `tickets-service` folder and run the tests directly from the UI (test explorer panel).
+
+## Kafka events SS
+
+<img width="1587" height="281" alt="service-logs" src="https://github.com/user-attachments/assets/66a84591-507d-4819-bb1e-bac3c0fbaac6" />
+
+<img width="1595" height="229" alt="notifications-logs" src="https://github.com/user-attachments/assets/47710227-8b40-4fb9-a50c-5d743f64cfc3" />
